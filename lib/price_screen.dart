@@ -1,4 +1,5 @@
 import 'package:bitcoin_ticker/coin_data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PriceScreen extends StatefulWidget {
@@ -7,7 +8,7 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
-  String dropdownValue = currenciesList[0];
+  String selectedCurrency = currenciesList[0];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,17 +36,32 @@ class _PriceScreenState extends State<PriceScreen> {
             ),
           ),
           Container(
-            height: 150.0,
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(bottom: 30.0),
-            color: Colors.lightBlue,
-            child: DropdownButton<String>(
-                value: dropdownValue,
+              height: 150.0,
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(bottom: 10.0),
+              color: Colors.lightBlue,
+              child: CupertinoPicker(
+                itemExtent: 32,
+                backgroundColor: Colors.lightBlue,
+                onSelectedItemChanged: (selectedIndex) {
+                  print(selectedIndex);
+                },
+                children: currenciesList.map<Text>((value) {
+                  return Text(value, style: TextStyle(color: Colors.white));
+                }).toList(),
+              )),
+        ],
+      ),
+    );
+  }
+}
+/* DropdownButton<String>(
+                value: selectedCurrency,
                 icon: Icon(Icons.arrow_downward),
                 iconSize: 24,
                 onChanged: (String value) {
                   setState(() {
-                    dropdownValue = value;
+                    selectedCurrency = value;
                   });
                 },
                 items: currenciesList.map<DropdownMenuItem<String>>((value) {
@@ -53,10 +69,4 @@ class _PriceScreenState extends State<PriceScreen> {
                     value: value,
                     child: Text(value),
                   );
-                }).toList()),
-          ),
-        ],
-      ),
-    );
-  }
-}
+                }).toList()), */
