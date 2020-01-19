@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:bitcoin_ticker/coin_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -66,8 +65,7 @@ class _PriceScreenState extends State<PriceScreen> {
             alignment: Alignment.center,
             padding: EdgeInsets.only(bottom: 10.0),
             color: Colors.lightBlue,
-            child:
-                Platform.isAndroid ? getDropDownButton() : getCupertinoPicker(),
+            child: getDropDownButton(),
           ),
         ],
       ),
@@ -89,19 +87,6 @@ class _PriceScreenState extends State<PriceScreen> {
             child: Text(value),
           );
         }).toList());
-  }
-
-  CupertinoPicker getCupertinoPicker() {
-    return CupertinoPicker(
-      itemExtent: 32,
-      backgroundColor: Colors.lightBlue,
-      onSelectedItemChanged: (selectedIndex) {
-        print(selectedIndex);
-      },
-      children: currenciesList.map<Text>((value) {
-        return Text(value, style: TextStyle(color: Colors.white));
-      }).toList(),
-    );
   }
 }
 
